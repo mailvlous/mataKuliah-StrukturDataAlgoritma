@@ -2,10 +2,10 @@
 int main()
 {
 int x, y;
-int *px;
+int *px; //pointer hanya berisi alamat
 x = 87;
-px = &x;
-y = *px;
+px = &x; //alamat pointer px menunjuk ke x
+y = *px; //y menunjuk ke nilai yang ditunjuk oleh px yaitu x
 printf("Alamat x = %p\n", &x);
 printf("Isi px = %d\n", x);
 printf("Nilai yang ditunjuk oleh px = %d\n", *px);

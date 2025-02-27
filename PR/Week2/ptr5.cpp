@@ -5,9 +5,9 @@ int main()
 /* Kamus Data (deklarasi, inisialisasi nilai variabel)*/
 int i = 5212121, j;
 char c = 'X';
-int *Ptri = (int *) malloc(4);
-int *Ptrj = (int *) malloc(sizeof(int));
-float *fx = (float *) malloc(sizeof(float));
+int *Ptri = (int *) malloc(4); // alokasi memori 4 byte
+int *Ptrj = (int *) malloc(sizeof(int)); // alokasi memori sesuai ukuran int
+float *fx = (float *) malloc(sizeof(float)); // alokasi memori sesuai ukurna float
 int A[5];
 float f = 7.23;
 /* program */
@@ -23,8 +23,8 @@ printf("Alamat c = %x \n", &c);
 printf("Nilai c = %c \n", c);
 printf("Ukuran char = %d byte\n\n", sizeof(char));
 
-printf("Alamat Ptri = %x \n", &Ptri);
-printf("Isi var Ptri = %x \n", Ptri);
+printf("Alamat Ptri = %x \n", &Ptri); // ini adalah alamat variabel yang dalam stack
+printf("Isi var Ptri = %x \n", Ptri); // ini adalah alamat memori yang dialokasi malloc dalam heap
 printf("Nilai yang ditunjuk oleh Ptri = %d \n", *Ptri);
 printf("Ukuran pointer int = %d byte\n\n", sizeof(int *));
 
