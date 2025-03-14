@@ -26,9 +26,45 @@ void Ins_Awal_Mahasiswa(address *p, address Pnew) {
     *p = Pnew;
 }
 
-void tampil_Mahasiswa(address p) {
+void tampil_Mahasiswa_Nama(address p) {
     while (p != Nil) {
         printf("Nama: %s, Nilai: %d\n", Nama(p), Nilai(p));
         p = Next(p);
+    }
+}
+
+void tampil_Mahasiswa_Nilai(address p) {
+    while (p != Nil) {
+        printf("Nama: %s, Nilai: %d\n", Nama(p), Nilai(p));
+        p = Next(p);
+    }
+}
+
+void hitung_Mahasiswa(address p) {
+    int jumlah = 0;
+    while (p != Nil) {
+        jumlah++;
+        p = Next(p);
+    }
+    printf("Jumlah Mahasiswa: %d\n", jumlah);
+}
+
+void nilai_70_Mahasiswa(address p) {
+    while (p != Nil) {
+        if (Nilai(p) >= 70) {
+            printf("Nama: %s, Nilai: %d\n", Nama(p), Nilai(p));
+        }
+        p = Next(p);
+    }
+}
+
+void copy_Mahasiswa(address p, address *q) {
+    while (p != Nil) {
+        address Pnew = createMahasiswa(Nama(p), Nilai(p));
+        if (Nilai(p) >= 70) {
+            Ins_Awal_Mahasiswa(q, Pnew);
+            p = Next(p);
+        }
+
     }
 }

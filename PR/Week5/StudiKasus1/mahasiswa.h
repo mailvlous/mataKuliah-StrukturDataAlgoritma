@@ -25,8 +25,17 @@ typedef struct tMahasiswa {
 // Deklarasi fungsi
 address createMahasiswa(char *nama_mhs, nilai nilai_mhs);
 
-void tampil_Mahasiswa(address p);
+void tampil_Mahasiswa_Nama(address p);
+
+void tampil_Mahasiswa_Nilai(address p);
 
 void Ins_Awal_Mahasiswa(address *p, address Pnew);
+
+void hitung_Mahasiswa(address p);
+
+void nilai_70_mahasiswa(address p);
+
+void copy_Mahasiswa(address p, address *q);
+
 
 #endif
