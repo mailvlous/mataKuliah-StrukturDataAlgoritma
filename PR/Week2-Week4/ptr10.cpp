@@ -15,7 +15,9 @@ int main()
 /* Elemen tabel yang ke - i akan mengakses fungsi ke - i */
 /* Pilihan menjadi indeks tabel, dan dipakai untuk mengaktifkan fungsi */
 /* yang sesuai */
-void (*tab[4]) () = {f1, f2, f3, f4}; /* Pointer ke procedure */
+/* Pointer ke procedure */
+void (*tab[4]) () = {f1, f2, f3, f4};  // array tab berisi pointer ke fungsi f1/0, f2/1, f3/2
+
 /* program */
 printf("Pointer to function : \n");
 /* Menu */
@@ -26,7 +28,9 @@ printf("1. Buka file hanya untuk baca \n");
 printf("2. Tutup file \n");
 printf("3. Edit file \n");
 printf("4. Quit \n");
-tab[getchar() - '1'] () ;
+tab[getchar() - '1'] () ; 
+tab[getchar() - '1' % 4]  () ;
+// getchar() // 
 getchar(); /* untuk membuang return karakter */
 } while (!quit);
 return 0;

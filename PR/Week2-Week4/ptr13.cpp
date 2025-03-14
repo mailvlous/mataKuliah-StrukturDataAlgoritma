@@ -20,8 +20,8 @@ void geser (int *TT, void (*f) (void *));
 int main()
 {
 /* kamus lokal */
-void *MyTabInt;
-void *MyTabC;
+int *MyTabInt;
+char *MyTabC;
 int i;
 /* program */
 N = 10;
