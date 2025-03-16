@@ -5,22 +5,33 @@
 
 
 int main() {
-    address L1 = Nil;
-    address L2 = Nil;
+    address L1 = NULL;
+    address L2 = NULL;
 
-    L1 = createMahasiswa("Asep", 50);
-    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Budi", 90));
-    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Caca", 100));
-    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Dedi", 100));
+    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Budi", 80));
+    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Asep", 90));
+    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Ucok", 85));
+    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Dedi", 60));
+    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Caca", 50));
 
-    tampil_Mahasiswa_Nama(L1);
-    tampil_Mahasiswa_Nilai(L1);
+    tampil_Mahasiswa(L1);
+
+    swap_Mahasiswa(&L1, L1, Next(L1));
+
+    tampil_Mahasiswa(L1);
+
+    sort_Nilai_Mahasiswa(&L1);
+
+    tampil_Mahasiswa(L1);
+
+    sort_Nama_Mahasiswa(&L1);
+
+    tampil_Mahasiswa(L1);
 
     hitung_Mahasiswa(L1);
 
-    nilai_70_Mahasiswa(L1);
+    copy_Mahasiswa_Nilai_70(L1, &L2);
 
-    copy_Mahasiswa(L1, &L2);
-    tampil_Mahasiswa_Nama(L2);
-    return 0;
+    tampil_Mahasiswa(L1);
+    tampil_Mahasiswa(L2);
 }

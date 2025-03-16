@@ -17,7 +17,7 @@ typedef int nilai;
 typedef struct tMahasiswa *address;
 typedef struct tMahasiswa {
     nilai nilai_mhs;
-    char *nama_mhs;   // Perbaikan: Gunakan char* langsung
+    char *nama_mhs;   
     address next;
     address prev;
 } Mahasiswa;
