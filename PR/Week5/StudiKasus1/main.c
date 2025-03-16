@@ -9,6 +9,7 @@ int main() {
     address L2 = NULL;
 
     Ins_Awal_Mahasiswa(&L1, createMahasiswa("Budi", 80));
+    Ins_Awal_Mahasiswa(&L1, createMahasiswa("Budi", 80));
     Ins_Awal_Mahasiswa(&L1, createMahasiswa("Asep", 90));
     Ins_Awal_Mahasiswa(&L1, createMahasiswa("Ucok", 85));
     Ins_Awal_Mahasiswa(&L1, createMahasiswa("Dedi", 60));
@@ -30,8 +31,24 @@ int main() {
 
     hitung_Mahasiswa(L1);
 
-    copy_Mahasiswa_Nilai_70(L1, &L2);
+    /*
+    copy mahasiswa tuh error gatau kenapa, kalo dijalanin program suka ngecrash
+    laptop saya tiba tiba error
+    jadi dicomment dulu ya pak
+    */
 
-    tampil_Mahasiswa(L1);
+    // copy_Mahasiswa_Nilai_70(L1, &L2); 
+
+    // tampil_Mahasiswa(L1);
+    // tampil_Mahasiswa(L2);
+
+    delete_Similar_Name_Mahasiswa(&L2);
+
     tampil_Mahasiswa(L2);
+
+    // delete_All_Mahasiswa(&L1);
+
+    // delete_All_Mahasiswa(&L2);
+
+
 }

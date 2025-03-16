@@ -189,13 +189,94 @@ void sort_Nama_Mahasiswa(address *head) {
     }
 }
 
+// void copy_Mahasiswa_Nilai_70(address p, address *q) {
+//     while (p != Nil) {
+//         address Pnew = createMahasiswa(Nama(p), Nilai(p));
+//         if (Nilai(p) >= 70) {
+//             Ins_Awal_Mahasiswa(q, Pnew);
+//             p = Next(p);
+//         }
+
+//     }
+// }
+
 void copy_Mahasiswa_Nilai_70(address p, address *q) {
     while (p != Nil) {
-        address Pnew = createMahasiswa(Nama(p), Nilai(p));
-        if (Nilai(p) >= 70) {
-            Ins_Awal_Mahasiswa(q, Pnew);
-            p = Next(p);
+        if (Nilai(p) >= 70) { 
+            address Pnew = createMahasiswa(Nama(p), Nilai(p));
+            if (Pnew != NULL) { // Prevent NULL pointer errors
+                Ins_Awal_Mahasiswa(q, Pnew);
+            }
         }
-
+        p = Next(p); // Move to the next node in every iteration
     }
+}
+
+void delete_Mahasiswa(address *head, char *nama) {
+    if (*head == NULL) return; 
+
+    address current = *head;
+
+    while (current != NULL && strcmp(Nama(current), nama) != 0) {
+        current = Next(current);
+    }
+
+    if (current == NULL) return; 
+
+    // Jika node yang dihapus adalah head
+    if (current == *head) {
+        *head = Next(current); // Geser head ke node berikutnya
+        if (*head != NULL) Prev(*head) = NULL;
+    } else {
+        Next(Prev(current)) = Next(current); // Hubungkan prev dengan next
+    }
+
+    if (Next(current) != NULL) {
+        Prev(Next(current)) = Prev(current); // Hubungkan next dengan prev
+    }
+
+    free(Nama(current)); 
+    free(current);
+}
+
+
+// void delete_Similar_Name_Mahasiswa(address p) {
+//     address current = p;
+//     while (current != NULL) {
+//         address next = Next(current);
+//         while (next != NULL) {
+//             if (strcmp(Nama(current), Nama(next)) == 0) {
+//                 delete_Mahasiswa(&p, Nama(current));
+//             }
+//             next = Next(next);
+//         }
+//         current = Next(current);
+//     }
+// }
+
+void delete_Similar_Name_Mahasiswa(address *head) {
+    address current = *head;
+    
+    while (current != NULL) {
+        address next = Next(current);
+        while (next != NULL) {
+            address temp = Next(next); // Simpan node berikutnya sebelum hapus
+            if (strcmp(Nama(current), Nama(next)) == 0) {
+                delete_Mahasiswa(head, Nama(next)); // Hapus duplikat
+            }
+            next = temp; // Lanjut ke node berikutnya
+        }
+        current = Next(current);
+    }
+}
+
+void delete_All_Mahasiswa(address *head) {
+    address current = *head;
+    while (current != NULL) {
+        address temp = Next(current); 
+        free(Nama(current)); 
+        free(current); 
+        current = temp; 
+    }
+    *head = NULL; 
 }

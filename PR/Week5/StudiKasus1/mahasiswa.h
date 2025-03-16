@@ -33,9 +33,18 @@ void Ins_Awal_Mahasiswa(address *p, address Pnew);
 
 void hitung_Mahasiswa(address p);
 
-void nilai_70_mahasiswa(address p);
+void swap_Mahasiswa(address *head, address mahasiswaA, address mahasiswaB);
 
-void copy_Mahasiswa(address p, address *q);
+void sort_Nilai_Mahasiswa(address *head);
 
+void sort_Nama_Mahasiswa(address *head);
+
+void copy_Mahasiswa_Nilai_70(address p, address *q);
+
+void delete_Mahasiswa(address *head, char *nama);
+
+void delete_Similar_Name_Mahasiswa(address *head);
+
+void delete_All_Mahasiswa(address *head);
 
 #endif
