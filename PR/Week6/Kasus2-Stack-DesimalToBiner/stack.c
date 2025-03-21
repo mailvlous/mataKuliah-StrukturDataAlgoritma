@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linked.h"
-#include "stack.c"
-#include <linked.c>
+#include "stack.h"
 
 
 address createStack (infotype p) {
@@ -21,14 +20,14 @@ void printStack (address p) {
     Tampil_List(p);
 }
 
-int decimalToBiner (int num) {
-    address *Stack = NULL;
+void decimalToBiner (int num) {
+    address Stack = NULL;
 
-    while (num != 0) {
-        address biner = createStack(num%2);
+    while (num > 0) {
+        address biner = createStack(num % 2);
         Ins_Awal(&Stack, biner);
         num /= 2;
     }
 
-    return Stack;
+    printStack(Stack);
 }

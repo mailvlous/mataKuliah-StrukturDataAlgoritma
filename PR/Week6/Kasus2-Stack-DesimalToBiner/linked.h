@@ -93,5 +93,7 @@ address BalikList (address p);
 /* IS : p sembarang */
 /* FS : Elemen List dibalik : elemen terakhir menjadi elemen pertama, dst */
 
+address createNode(infotype x);
+
 
 #endif

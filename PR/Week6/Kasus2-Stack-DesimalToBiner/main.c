@@ -1,6 +1,7 @@
 #include "linked.h"
 #include "linked.c"
-#include <stack.c>
+#include "stack.h"
+#include "stack.c"
 #include <stdlib.h>
 #include <stdio.h>
 
