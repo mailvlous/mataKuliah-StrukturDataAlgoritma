@@ -68,7 +68,10 @@ void Ins_Akhir(address *p, address Pnew) {
 
 void Del_Awal(address *p, infotype *x) {
     if (*p == Nil) {
-
+    /*
+    jadi kalo delete tuh harus nyiapin address tambahan yaitu temp
+    fungsinya untuk mutusin next dari node pertama(*p) dan buang info dari node pertama
+    */
     } else {
         address temp = *p; // ambil alamat node pertama, jadi temp sekarng punya Next yang sama kayak *p yaitu nunjuk ke elemen kedua
         *x = Info(temp); // karena temp itu sekarng node pertama maka *x itu info dari node pertama

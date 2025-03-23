@@ -15,7 +15,7 @@ typedef struct tElmtList {
 	infotype info;
 	address  next;
 	address prev;
- } ElmtList;
+} ElmtList;
 
 boolean isEmpty(address p);
 // Tujuan : memeriksa apakah linked masih kosong

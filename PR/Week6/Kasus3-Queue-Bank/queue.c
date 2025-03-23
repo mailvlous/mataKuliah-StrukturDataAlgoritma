@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 bool isQueueEmpty(address p){
-    isE mpty(p);
+    isEmpty(p);
 }
 
 void create_Queue(address *p){
