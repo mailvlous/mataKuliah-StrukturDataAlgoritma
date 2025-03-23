@@ -11,6 +11,10 @@ void isEmpty(address p) {
     }
 }
 
+void Create_CommentList(address *P) {
+    *P = NULL;
+}
+
 address createComment(char *comment) {
     address P = (address)malloc(sizeof(CommentList)); 
     if (P != NULL) {
