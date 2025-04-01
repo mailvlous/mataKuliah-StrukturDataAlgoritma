@@ -23,6 +23,8 @@ typedef struct tElmtList {
 	address prev;
  } ElmtList;
 
+
+
 boolean isEmpty(address p);
 // Tujuan : memeriksa apakah linked masih kosong
 // Linked list kosong , jika Head == NULL

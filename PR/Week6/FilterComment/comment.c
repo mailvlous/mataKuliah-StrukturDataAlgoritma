@@ -28,6 +28,7 @@ address createComment(char *comment) {
     return P;
 }
 
+
 void Ins_Awal(address *p, address Pnew) {
     if (Pnew == NULL) return;
 

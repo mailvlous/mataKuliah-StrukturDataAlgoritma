@@ -2,7 +2,7 @@
 int main()
 {
 int x, y;
-int *px; //pointer hanya berisi alamat
+int *px; //pointer hanya berisi alamat, cuma nunjuk
 x = 87;
 px = &x; //alamat pointer px menunjuk ke x
 y = *px; //y menunjuk ke nilai yang ditunjuk oleh px yaitu x

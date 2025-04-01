@@ -30,10 +30,10 @@ void Create_Node (address *p){
 }
 
 address createNode(infotype x){
-    address *p = malloc(sizeof(ElmtList));
-    Info(*p) = x;
-    Next(*p) = NULL;
-    return *p;
+    address p = (address) malloc(sizeof(ElmtList)); 
+    Info(p) = x;
+    Next(p) = NULL;
+    return p;
 }
 
 
@@ -76,6 +76,7 @@ void Ins_Akhir(address *p, address Pnew) {
     } else {
         Next(Pnew) = NULL;
         address last = *p;
+        
         /*jadi ini bakal nyari node terakhir atau node yang nextnya itu null*/
         while(Next(last) != NULL) { 
             last = Next(last); 
