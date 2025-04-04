@@ -1,1 +1,1 @@
-u 
+*pkota = 'JAKARTA'; // karena dinamis

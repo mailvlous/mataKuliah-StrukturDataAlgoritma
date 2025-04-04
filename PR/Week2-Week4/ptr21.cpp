@@ -9,7 +9,7 @@
 /* Definisi TYPE global */
 /* Element list linier */
 typedef int infotype;
-typedef struct tElmtlist *address;
+typedef struct tElmtlist* address;
 typedef struct tElmtlist {
     infotype info;
     address next;
