@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 void createListKota(ListKota *L) {
     HeadKota(L) = NULL;
@@ -48,3 +49,13 @@ void printSeluruhKota(ListKota L) {
     }
 }
 
+void findKota(ListKota L, char *kota) {
+    addrKota temp = L.head;
+    while (temp != NULL) {
+        if (strcmp(temp->data.kt, kota) == 0) {
+            printf("\n");
+            printKota(DataKota(temp));
+        } 
+        temp = temp->next; // Akses langsung tanpa NextKota()
+    }
+}
