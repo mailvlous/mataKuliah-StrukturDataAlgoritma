@@ -192,3 +192,45 @@ void search_Nama(Kota *K, char *nama) {
     }
 } 
 
+void delete_Penduduk(address *head, char *nama) {
+    if (*head == NULL) return; 
+
+    address current = *head;
+
+    while (current != NULL && strcmp(Nama(current), nama) != 0) {
+        current = Next(current);
+    }
+
+    if (current == NULL) return; 
+
+    // Jika node yang dihapus adalah head
+    if (current == *head) {
+        *head = Next(current); // Geser head ke node berikutnya
+        if (*head != NULL) Prev(*head) = NULL;
+    } else {
+        Next(Prev(current)) = Next(current); // Hubungkan prev dengan next
+    }
+
+    if (Next(current) != NULL) {
+        Prev(Next(current)) = Prev(current); // Hubungkan next dengan prev
+    }
+
+    free(Nama(current)); 
+    free(current);
+}
+
+void hapus_Penduduk(Kota *K, char *nama) {
+    if (K == NULL || Penduduk(K) == NULL) return;
+
+    address x = Penduduk(K);
+
+    while (x != NULL) {
+        if (strcmp(Nama(x), nama) == 0) {
+            delete_Penduduk(&Penduduk(K), nama);
+            return; 
+        }
+        x = Next(x);
+    }
+}
+
+

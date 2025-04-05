@@ -38,16 +38,18 @@ void printListKota(ListKota L) {
         printf(" -> %s", temp->data.kt);
         temp = temp->next; // Akses langsung tanpa NextKota()
     }
+    printf("\n");
 }
 
-void printSeluruhKota(ListKota L) {
-    addrKota temp = L.head;
-    printf("Kota: ");
-    while (temp != NULL) {
-        printf(" -> %s", temp->data.kt);
-        temp = temp->next; // Akses langsung tanpa NextKota()
-    }
-}
+// void printSeluruhKota(ListKota L) {
+//     addrKota temp = L.head;
+//     printf("Kota: ");
+//     while (temp != NULL) {
+//         printf(" -> %s", temp->data.kt);
+//         temp = temp->next; // Akses langsung tanpa NextKota()
+//     }
+//     printf("\n");
+// }
 
 void findKota(ListKota L, char *kota) {
     addrKota temp = L.head;
@@ -56,6 +58,24 @@ void findKota(ListKota L, char *kota) {
             printf("\n");
             printKota(DataKota(temp));
         } 
-        temp = temp->next; // Akses langsung tanpa NextKota()
+        temp = temp->next; 
+    }
+}
+
+void hapusKota(ListKota *L, char *kota) {
+    addrKota temp = L->head;
+    addrKota prev = NULL;
+    while (temp != NULL) {
+        if (strcmp(temp->data.kt, kota) == 0) {
+            if (prev == NULL) {
+                L->head = temp->next;
+            } else {
+                prev->next = temp->next;
+            }
+            free(temp);
+            return;
+        }
+        prev = temp;
+        temp = temp->next;
     }
 }

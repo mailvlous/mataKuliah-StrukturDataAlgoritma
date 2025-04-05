@@ -10,67 +10,80 @@ int main() {
     ListKota L;
     L.head = NULL;
 
-    // addrKota K1 = createKotaElmt("Jakarta");
-    // addrKota K2 = createKotaElmt("Bandung");
+    addrKota K1 = createKotaElmt("Jakarta");
+    addrKota K2 = createKotaElmt("Bandung");
 
-    // addKota(&L, K1);
-    // addKota(&L, K2);
+    addKota(&L, K1);
+    addKota(&L, K2);
 
-    // Ins_Penduduk(&(DataKota(K1)), createPenduduk("Budi", 20));
+    Ins_Penduduk(&(DataKota(K1)), createPenduduk("Budi", 20));
+    Ins_Penduduk(&(DataKota(K1)), createPenduduk("Caca", 21));
 
-    // printKota(DataKota(K1));
+    printKota(DataKota(K1));
 
-    // printListKota(L);
+    printListKota(L);
 
-    // findKota(L, "Jakarta");
+    hapus_Penduduk(&(DataKota(K1)), "Budi");
 
-    int choose;
+    printKota(DataKota(K1));
 
-    while (1) {
-        printf("Menu:\n");
-        printf("1. Tambah Kota\n");
-        printf("2. Hapus Kota\n");
-        printf("3. Buka Daftar Kota\n");
-        printf("4. Buka Data Kota\n");
-        printf("5. Keluar\n");
-        
-        scanf("%d", &choose);
+    hapusKota(&L, "Bandung");
 
-        switch(choose) {
-            case 1:
-            printf("Masukkan nama kota: ");
-            char *tambahKota;
-            scanf("%s", &tambahKota);
+    printListKota(L);
 
-            addKota(&L, createKotaElmt(tambahKota));
+    // int choose;
 
-            break;
+    // while (1) {
+    //     printf("\nMenu:\n");
+    //     printf("1. Tambah Kota\n");
+    //     printf("2. Hapus Kota\n");
+    //     printf("3. Buka Daftar Kota\n");
+    //     printf("4. Tambah Penduduk\n");
+    //     printf("5. Hapus Penduduk\n");
+    //     printf("6. Buka Data Kota\n");
+    //     printf("7. Keluar\n");
+    //     printf("Pilihan: ");
 
+    //     scanf("%d", &choose);
+    //     getchar(); 
 
-            case 2:
+    //     switch(choose) {
+    //         case 1: {
+    //             char tambahKota[100];
+    //             printf("Masukkan nama kota: ");
+    //             scanf("%s", tambahKota);
+    //             addKota(&L, createKotaElmt(tambahKota));
+    //             break;
+    //         }
 
+    //         case 2:
 
-            break;
+    //             break;
 
-            case 3:
-            printf("Daftar Kota:\n");
-            printListKota(L);
+    //         case 3:
+    //             printf("Daftar Kota:\n");
+    //             printListKota(L);
 
-            break;
+    //             break;
 
-            case 4:
-            printf("Masukkan nama kota: \n");
-            char *dataKota;
-            scanf("%s", &dataKota);
+    //         case 4: {
+    //             char dataKota[100];
+    //             scanf("%s", dataKota);
+    //             if (findKota(L, dataKota)) {
+    //                 printf("Data Kota:\n");
+    //             }
 
-            findKota(L, dataKota);
+    //             break;
+    //         }
 
-            break;
+    //         case 5:
+    //             exit(0);
 
-            case 5:
-            exit(0);
+    //         default:
+    //             printf("Pilihan tidak valid.\n");
+    //     }
+    // }
 
-        }
-    }
+    // return 0;
 }
 
