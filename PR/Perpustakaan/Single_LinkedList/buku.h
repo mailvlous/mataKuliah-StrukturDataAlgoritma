@@ -80,6 +80,18 @@ void ins_Awal_Buku(address *head, address buku) {
     *head = buku;
 }
 
+address cariBukuByNama(Buku head, const char* nama) {
+    address current = head;
+    while (current != NULL) {
+        if (Tipe(current) == TipeBuku && strcmp(Name(current), nama) == 0) {
+            return current;
+        }
+        current = Next(current);
+    }
+    return NULL;
+}
+
+
 void printList(address node) {
     if (node == NULL) {
         printf("{}\n");
