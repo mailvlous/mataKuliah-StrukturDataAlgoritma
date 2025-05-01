@@ -158,34 +158,34 @@ void swap_Mahasiswa(address *head, address mahasiswaA, address mahasiswaB) {
 void sort_Nilai_Mahasiswa(address *head) {
     if (*head == NULL || Next(*head) == NULL) return; 
 
-    address current = Next(*head); 
+    address kanan = Next(*head); 
 
-    while (current != NULL) {
-        address sorted = Prev(current); 
+    while (kanan != NULL) {
+        address kiri = Prev(kanan); 
 
-        while (sorted != NULL && Nilai(current) > Nilai(sorted)) {
-            swap_Mahasiswa(head, sorted, current); 
-            sorted = Prev(current); 
+        while (kiri != NULL && Nilai(kanan) > Nilai(kiri)) {
+            swap_Mahasiswa(head, kiri, kanan); 
+            kiri = Prev(kanan); 
         }
 
-        current = Next(current);
+        kanan = Next(kanan);
     }
 }
 
 void sort_Nama_Mahasiswa(address *head) {
     if (*head == NULL || Next(*head) == NULL) return; 
 
-    address current = Next(*head); 
+    address kanan = Next(*head); 
 
-    while (current != NULL) {
-        address sorted = Prev(current); 
+    while (kanan != NULL) {
+        address kiri = Prev(kanan); 
 
-        while (sorted != NULL && strcmp(Nama(current), Nama(sorted)) < 0) {
-            swap_Mahasiswa(head, sorted, current); 
-            sorted = Prev(current); 
+        while (kiri != NULL && strcmp(Nama(kanan), Nama(kiri)) < 0) {
+            swap_Mahasiswa(head, kiri, kanan); 
+            kiri = Prev(kanan); 
         }
 
-        current = Next(current);
+        kanan = Next(kanan);
     }
 }
 
@@ -215,68 +215,53 @@ void copy_Mahasiswa_Nilai_70(address p, address *q) {
 void delete_Mahasiswa(address *head, char *nama) {
     if (*head == NULL) return; 
 
-    address current = *head;
+    address kanan = *head;
 
-    while (current != NULL && strcmp(Nama(current), nama) != 0) {
-        current = Next(current);
+    while (kanan != NULL && strcmp(Nama(kanan), nama) != 0) {
+        kanan = Next(kanan);
     }
 
-    if (current == NULL) return; 
+    if (kanan == NULL) return; 
 
     // Jika node yang dihapus adalah head
-    if (current == *head) {
-        *head = Next(current); // Geser head ke node berikutnya
+    if (kanan == *head) {
+        *head = Next(kanan); // Geser head ke node berikutnya
         if (*head != NULL) Prev(*head) = NULL;
     } else {
-        Next(Prev(current)) = Next(current); // Hubungkan prev dengan next
+        Next(Prev(kanan)) = Next(kanan); // Hubungkan prev dengan next
     }
 
-    if (Next(current) != NULL) {
-        Prev(Next(current)) = Prev(current); // Hubungkan next dengan prev
+    if (Next(kanan) != NULL) {
+        Prev(Next(kanan)) = Prev(kanan); // Hubungkan next dengan prev
     }
 
-    free(Nama(current)); 
-    free(current);
+    free(Nama(kanan)); 
+    free(kanan);
 }
 
-
-// void delete_Similar_Name_Mahasiswa(address p) {
-//     address current = p;
-//     while (current != NULL) {
-//         address next = Next(current);
-//         while (next != NULL) {
-//             if (strcmp(Nama(current), Nama(next)) == 0) {
-//                 delete_Mahasiswa(&p, Nama(current));
-//             }
-//             next = Next(next);
-//         }
-//         current = Next(current);
-//     }
-// }
-
 void delete_Similar_Name_Mahasiswa(address *head) {
-    address current = *head;
+    address kanan = *head;
     
-    while (current != NULL) {
-        address next = Next(current);
+    while (kanan != NULL) {
+        address next = Next(kanan);
         while (next != NULL) {
             address temp = Next(next); // Simpan node berikutnya sebelum hapus
-            if (strcmp(Nama(current), Nama(next)) == 0) {
+            if (strcmp(Nama(kanan), Nama(next)) == 0) {
                 delete_Mahasiswa(head, Nama(next)); // Hapus duplikat
             }
             next = temp; // Lanjut ke node berikutnya
         }
-        current = Next(current);
+        kanan = Next(kanan);
     }
 }
 
 void delete_All_Mahasiswa(address *head) {
-    address current = *head;
-    while (current != NULL) {
-        address temp = Next(current); 
-        free(Nama(current)); 
-        free(current); 
-        current = temp; 
+    address kanan = *head;
+    while (kanan != NULL) {
+        address temp = Next(kanan); 
+        free(Nama(kanan)); 
+        free(kanan); 
+        kanan = temp; 
     }
     *head = NULL; 
 }

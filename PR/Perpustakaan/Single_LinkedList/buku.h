@@ -1,0 +1,174 @@
+#ifndef BUKU_H
+#define BUKU_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+
+// #define Judul(B) (B)->judul
+// #define Stok(B) (B)->stok
+// #define NextBuku(B) (B)->nextBuku
+
+// typedef struct tBuku *address;
+
+// typedef struct tBuku {
+//     char *judul;
+//     int stok;
+//     address nextBuku;
+// }Buku;
+
+// #define Nama(A) (A)->nama
+// #define Level(A) (A)->level
+// #define Next(A) (A)->next
+
+// typedef struct tAnggota {
+//     char *nama;
+//     int level;
+//     address next; // ini tuh bisa nunjuk buku juga
+// }Anggota;
+
+#define Name(P) (P)->name
+#define Value(P) (P)->value
+#define Tipe(P) (P)->tipe
+#define Next(P) (P)->next 
+
+typedef enum {
+    TipeAnggota,
+    TipeBuku
+}Tipe;
+
+typedef struct tNode *address;
+
+typedef struct tNode{
+    char *name;
+    int value;
+    Tipe tipe;
+    address next;
+}Node;
+
+typedef Node* Buku;
+
+Buku createBuku(char *judul, int stok) {
+    address newBuku = (address)malloc(sizeof(Node));
+
+    if (newBuku == NULL){
+        printf("ALokasi gamgal");
+    }
+    Name(newBuku) = judul;
+    Value(newBuku) = stok;
+    Tipe(newBuku) = TipeBuku;
+    Next(newBuku) = NULL;
+
+    return newBuku;
+}
+
+void ins_Awal_Buku(address *head, address buku) {
+    if (buku == NULL) return;
+
+    Next(buku) = *head;
+    *head = buku;
+}
+
+void printList(address node) {
+    if (node == NULL) {
+        printf("{}\n");
+        return;
+    }
+
+    printf("List: { ");
+    while (node != NULL) {
+        if (Tipe(node) == TipeAnggota) {
+            printf("[ %s | Anggota | Level: %d ]", Name(node), Value(node));
+        } else {
+            printf("[ %s | Buku | Stok: %d ]", Name(node), Value(node));
+        }
+
+        node = Next(node);
+        if (node != NULL) {
+            printf(" -> ");
+        }
+    }
+    printf("}\n");
+
+    printf("\n");
+}
+
+void printListTerfilter(address list) {
+    if (list == NULL) {
+        printf("{}\n");
+        return;
+    }
+
+    printf("List: { ");
+
+    while (list != NULL) {
+        if (Tipe(list) == TipeBuku) {
+            printf("[ %s | Buku | Stok: %d ]", Name(list), Value(list));
+
+            // Hitung jumlah anggota setelah buku ini
+            int stok_awal = Value(list);  // Misalnya ini stok setelah prosesPeminjaman
+            address anggota = Next(list);
+            int totalAnggota = 0;
+
+            address temp = anggota;
+            while (temp != NULL && Tipe(temp) == TipeAnggota) {
+                totalAnggota++;
+                temp = Next(temp);
+            }
+
+            int mulaiCetak = (stok_awal < totalAnggota) ? totalAnggota - stok_awal : 0;
+
+            // Cetak hanya yang mengantri
+            int i = 0;
+            while (anggota != NULL && Tipe(anggota) == TipeAnggota) {
+                if (i >= mulaiCetak) {
+                    printf(" -> [ %s | Anggota | Level: %d ]", Name(anggota), Value(anggota));
+                }
+                i++;
+                anggota = Next(anggota);
+            }
+
+            // Lanjutkan ke node berikutnya setelah anggota
+            list = temp;
+        } else {
+            list = Next(list);
+        }
+
+        if (list != NULL && Tipe(list) == TipeBuku) {
+            printf(" -> ");
+        }
+    }
+
+    printf(" }\n");
+    
+}
+
+
+
+
+// void enqueue_AnggotaToBuku(address *head, char namaBuku,  address anggota){
+//     if (anggota == NULL) return;
+
+//     Next(anggota) = NULL;
+
+//     if (Tipe(*head) == TipeBuku) {
+//         Next(anggota) = *head;
+//         *head = anggota;
+//         return;
+//     }
+//     else 
+//     {
+//         address temp = *head;
+//         while (Next(temp) != NULL && Tipe(Next(temp)) != TipeBuku && Value(Next(temp)) != namaBuku) {
+//             temp = Next(temp);
+//         }
+//         Next(temp) = anggota;
+//     }
+// }
+
+
+
+
+
+
+#endif // 

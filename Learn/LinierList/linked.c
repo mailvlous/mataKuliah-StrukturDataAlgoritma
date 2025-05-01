@@ -5,12 +5,12 @@
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 
-// typedef int infotype;
-// typedef struct tElmtList *address;
-// typedef struct tElmtList {
-// 	infotype info;
-// 	address  next;
-//  } ElmtList;
+typedef int infotype;
+typedef struct tElmtList *address;
+typedef struct tElmtList {
+	infotype info;
+	address  next;
+ } ElmtList;
 
 boolean isEmpty(address p){
     if (p == NULL){
@@ -30,16 +30,11 @@ void Create_Node (address *p){
 }
 
 address createNode(infotype x){
-    address newNode = (address)malloc(sizeof(ElmtList));
-    if (newNode == NULL) {
-        printf("Gagal mengalokasikan memori.\n");
-        exit(1);
-    }
-    Info(newNode) = x;
-    Next(newNode) = NULL;
-    return newNode;
+    address p = (address) malloc(sizeof(ElmtList)); 
+    Info(p) = x;
+    Next(p) = NULL;
+    return p;
 }
-
 
 
 // Insert Node
@@ -64,53 +59,31 @@ void insertNode(address *p, infotype nilai){
 
 // Insert at first
 
-
 void Ins_Awal(address *p, address Pnew) {
-    if (Pnew == NULL) return;
-
-    Next(Pnew) = *p;
-    *p = Pnew;
+    if (*p == NULL) {
+        *p = Pnew;
+    } else {
+        Next(Pnew) = *p; //Pnew nunjuk ke *p 
+        *p = Pnew; // *p akan di assign Pnew
+    }
 }
-// void Ins_Awal(address *p, address Pnew) {
-//     if (*p == NULL) {
-//         *p = Pnew;
-//     } else {
-//         Next(Pnew) = *p; //Pnew nunjuk ke *p 
-//         *p = Pnew; // *p akan di assign Pnew
-//     }
-// }
 
 // Insert at last
 
 void Ins_Akhir(address *p, address Pnew) {
-    if (Pnew == NULL) return;
-
-    Next(Pnew) = NULL;
-
     if (*p == NULL) {
         *p = Pnew;
     } else {
+        Next(Pnew) = NULL;
         address last = *p;
-        while (Next(last) != NULL) {
-            last = Next(last);
+        
+        /*jadi ini bakal nyari node terakhir atau node yang nextnya itu null*/
+        while(Next(last) != NULL) { 
+            last = Next(last); 
         }
-        Next(last) = Pnew;
+        Next(last) = Pnew; // kalo nextnya null, ini bakal di assign Pnew
     }
 }
-
-// void Ins_Akhir(address *p, address Pnew) {
-//     if (*p == NULL) {
-//         *p = Pnew;
-//     } else {
-//         Next(Pnew) = NULL;
-//         address last = *p;
-//         /*jadi ini bakal nyari node terakhir atau node yang nextnya itu null*/
-//         while(Next(last) != NULL) { 
-//             last = Next(last); 
-//         }
-//         Next(last) = Pnew; // kalo nextnya null, ini bakal di assign Pnew
-//     }
-// }
 
 // Insert between/after
 
@@ -334,18 +307,16 @@ void Del_After_Value(address *pHead, infotype nilai, infotype *x) {
 
 void Tampil_List(address p){
     if (p == NULL) {
-        printf("{}");
+        printf("Linked list kosong.\n");
         return;
     }
 
-    printf("elemen List: ");
-    printf("{");
+    printf("Isi Linked List: ");
     while (p != NULL) {
-        printf("%d,", Info(p));
+        printf("[%d] -> ", Info(p));
         p = Next(p);
     }
-    printf("}");
-    printf("\n");
+    printf("NULL\n");
 }
 
 

@@ -19,6 +19,7 @@ typedef struct tElmtList* address;
 typedef struct tElmtList {
     char *nama;
     infotype umur;
+    infotype level;
     address next;
     address prev;
 } ElmtList;
