@@ -2,17 +2,45 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_HISTORY 100
+typedef struct {
+    char namaBuku[100];
+    char namaAnggota[100];
+    int jumlah; // Jumlah buku yang dipinjam atau dikembalikan
+    char tipeTransaksi[20]; // "Peminjaman" atau "Pengembalian"
+    char tanggal[20]; // Tanggal transaksi
+} History;
 
+History historyList[100]; // Array untuk menyimpan catatan transaksi
+int historyCount = 0; // Untuk menghitung jumlah transaksi
 
-// History Log
-char historyLog[MAX_HISTORY][200];
-int jumlahHistory = 0;
+void tambahHistory(char *namaBuku, char *namaAnggota, int jumlah, char *tipeTransaksi) {
+    if (historyCount < 100) {
+        strcpy(historyList[historyCount].namaBuku, namaBuku);
+        
+        if (strcmp(tipeTransaksi, "Peminjaman") == 0 && namaAnggota != NULL) {
+            strcpy(historyList[historyCount].namaAnggota, namaAnggota);
+        } else {
+            historyList[historyCount].namaAnggota[0] = '\0'; // kosongkan
+        }
 
-// Fungsi untuk menambahkan history
-void tambahHistory(const char* action, const char* anggota, const char* buku) {
-    if (jumlahHistory < MAX_HISTORY) {
-        sprintf(historyLog[jumlahHistory++], "%s %s \"%s\"", anggota, action, buku);
+        historyList[historyCount].jumlah = jumlah;
+        strcpy(historyList[historyCount].tipeTransaksi, tipeTransaksi);
+        historyCount++;
+    } else {
+        printf("Catatan penuh!\n");
     }
 }
 
+
+void tampilkanHistory() {
+    for (int i = 0; i < historyCount; i++) {
+        printf("Buku: %s | ", historyList[i].namaBuku);
+
+        if (strcmp(historyList[i].tipeTransaksi, "Peminjaman") == 0) {
+            printf("Anggota: %s | ", historyList[i].namaAnggota);
+        }
+
+        printf("Jumlah: %d | Transaksi: %s\n", 
+               historyList[i].jumlah, historyList[i].tipeTransaksi);
+    }
+}

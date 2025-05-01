@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include "buku.h"
 #include "anggota.h"
+#include "catatan.h"
 
 #define Front(P) (P)->front
 #define Buku(P) (P)->buku
@@ -287,6 +288,102 @@ void urutkanAntrianBerdasarLevel(Buku *listBuku, char *namaBuku) {
 }
 
 
+// void prosesPeminjamanBuku(Buku *listBuku, char *namaBuku, Queue queueAnggota) {
+//     address currBuku = *listBuku;
+
+//     // Cari buku
+//     while (currBuku != NULL && strcmp(Name(currBuku), namaBuku) != 0) {
+//         currBuku = Next(currBuku);
+//     }
+
+//     if (currBuku != NULL) {
+//         address nextBuku = NULL;
+//         address currAnggota = Next(currBuku); // Karena sebelumnya sudah disambung
+//         int stok = Value(currBuku);
+
+//         if (stok > 1 && currAnggota != NULL) {
+//             // Hitung anggota antrian
+//             int jumlahAntrian = 0;
+//             address temp = currAnggota;
+//             while (temp != NULL && Tipe(temp) == TipeAnggota) {
+//                 jumlahAntrian++;
+//                 temp = Next(temp);
+//             }
+
+//             nextBuku = temp; // Simpan pointer ke node setelah antrian
+
+//             int bisaDilayani = (stok - 1 < jumlahAntrian) ? stok - 1 : jumlahAntrian;
+//             Value(currBuku) -= bisaDilayani;
+
+//             // Lewati anggota yang sudah dilayani
+//             address iter = currAnggota;
+//             for (int i = 0; i < bisaDilayani && iter != NULL; i++) {
+//                 iter = Next(iter);
+//             }
+
+//             // Sambungkan sisa antrian (jika masih ada)
+//             if (iter != NULL && Tipe(iter) == TipeAnggota) {
+//                 Next(currBuku) = iter;
+
+//                 address last = iter;
+//                 while (last != NULL && Next(last) != NULL && Tipe(Next(last)) == TipeAnggota) {
+//                     last = Next(last);
+//                 }
+
+//                 if (last != NULL) {
+//                     Next(last) = nextBuku;
+//                 }
+//             } else {
+//                 // Tidak ada antrian tersisa
+//                 Next(currBuku) = nextBuku;
+//             }
+//         } else if (stok == 1 && currAnggota != NULL && Tipe(currAnggota) == TipeAnggota) {
+//             // Stok tinggal 1 dan antrian masih ada, biarkan sambungan
+//             address last = currAnggota;
+//             while (last != NULL && Next(last) != NULL && Tipe(Next(last)) == TipeAnggota) {
+//                 last = Next(last);
+//             }
+
+//             if (last != NULL) {
+//                 Next(last) = Next(last);  // sambungkan ke nextBuku kalau ada
+//             }
+//         } else {
+//             // Tidak ada antrian atau stok cukup tapi tidak disambungkan
+//             Value(currBuku) = stok; // tetap
+//         }
+//     }
+// }
+
+// void prosesPengembalianBuku(Buku *listBuku, char *namaBuku, int jumlah) {
+//     address currBuku = *listBuku;
+
+//     // Cari buku
+//     while (currBuku != NULL && strcmp(Name(currBuku), namaBuku) != 0) {
+//         currBuku = Next(currBuku);
+//     }
+
+//     if (currBuku != NULL && Tipe(currBuku) == TipeBuku) {
+//         Value(currBuku) += jumlah;
+
+//         address curr = Next(currBuku);  // antrian anggota
+//         int stok = Value(currBuku);
+//         int bisaLangsungPinjam = stok - 1;
+
+//         address prev = currBuku;
+
+//         while (curr != NULL && Tipe(curr) == TipeAnggota && bisaLangsungPinjam > 0) {
+//             // Hapus anggota dari list (karena sudah pinjam)
+//             Next(prev) = Next(curr);
+//             free(curr); // jika alokasi dinamis
+//             curr = Next(prev);
+//             Value(currBuku)--; // stok turun
+//             bisaLangsungPinjam--;
+//         }
+//     } else {
+//         printf("Buku '%s' tidak ditemukan!\n", namaBuku);
+//     }
+// }
+
 void prosesPeminjamanBuku(Buku *listBuku, char *namaBuku, Queue queueAnggota) {
     address currBuku = *listBuku;
 
@@ -297,11 +394,10 @@ void prosesPeminjamanBuku(Buku *listBuku, char *namaBuku, Queue queueAnggota) {
 
     if (currBuku != NULL) {
         address nextBuku = NULL;
-        address currAnggota = Next(currBuku); // Karena sebelumnya sudah disambung
+        address currAnggota = Next(currBuku);
         int stok = Value(currBuku);
 
         if (stok > 1 && currAnggota != NULL) {
-            // Hitung anggota antrian
             int jumlahAntrian = 0;
             address temp = currAnggota;
             while (temp != NULL && Tipe(temp) == TipeAnggota) {
@@ -309,10 +405,18 @@ void prosesPeminjamanBuku(Buku *listBuku, char *namaBuku, Queue queueAnggota) {
                 temp = Next(temp);
             }
 
-            nextBuku = temp; // Simpan pointer ke node setelah antrian
-
+            nextBuku = temp;
             int bisaDilayani = (stok - 1 < jumlahAntrian) ? stok - 1 : jumlahAntrian;
             Value(currBuku) -= bisaDilayani;
+
+            // Catat history untuk tiap anggota
+            address iterAnggota = currAnggota;
+            for (int i = 0; i < bisaDilayani && iterAnggota != NULL; i++) {
+                if (Tipe(iterAnggota) == TipeAnggota) {
+                    tambahHistory(namaBuku, Name(iterAnggota), 1, "Peminjaman");
+                }
+                iterAnggota = Next(iterAnggota);
+            }
 
             // Lewati anggota yang sudah dilayani
             address iter = currAnggota;
@@ -323,32 +427,26 @@ void prosesPeminjamanBuku(Buku *listBuku, char *namaBuku, Queue queueAnggota) {
             // Sambungkan sisa antrian (jika masih ada)
             if (iter != NULL && Tipe(iter) == TipeAnggota) {
                 Next(currBuku) = iter;
-
                 address last = iter;
                 while (last != NULL && Next(last) != NULL && Tipe(Next(last)) == TipeAnggota) {
                     last = Next(last);
                 }
-
                 if (last != NULL) {
                     Next(last) = nextBuku;
                 }
             } else {
-                // Tidak ada antrian tersisa
                 Next(currBuku) = nextBuku;
             }
         } else if (stok == 1 && currAnggota != NULL && Tipe(currAnggota) == TipeAnggota) {
-            // Stok tinggal 1 dan antrian masih ada, biarkan sambungan
             address last = currAnggota;
             while (last != NULL && Next(last) != NULL && Tipe(Next(last)) == TipeAnggota) {
                 last = Next(last);
             }
-
             if (last != NULL) {
-                Next(last) = Next(last);  // sambungkan ke nextBuku kalau ada
+                Next(last) = Next(last);  // sebenarnya tidak mengubah apapun
             }
         } else {
-            // Tidak ada antrian atau stok cukup tapi tidak disambungkan
-            Value(currBuku) = stok; // tetap
+            Value(currBuku) = stok;
         }
     }
 }
@@ -364,20 +462,21 @@ void prosesPengembalianBuku(Buku *listBuku, char *namaBuku, int jumlah) {
     if (currBuku != NULL && Tipe(currBuku) == TipeBuku) {
         Value(currBuku) += jumlah;
 
-        address curr = Next(currBuku);  // antrian anggota
+        address curr = Next(currBuku);
         int stok = Value(currBuku);
         int bisaLangsungPinjam = stok - 1;
-
         address prev = currBuku;
 
         while (curr != NULL && Tipe(curr) == TipeAnggota && bisaLangsungPinjam > 0) {
-            // Hapus anggota dari list (karena sudah pinjam)
             Next(prev) = Next(curr);
-            free(curr); // jika alokasi dinamis
+            free(curr); // jika pakai malloc
             curr = Next(prev);
-            Value(currBuku)--; // stok turun
+            Value(currBuku)--; // kurangi stok karena langsung dipinjam
             bisaLangsungPinjam--;
         }
+
+        // Tambahkan catatan pengembalian
+        tambahHistory(namaBuku, NULL, jumlah, "Pengembalian");
     } else {
         printf("Buku '%s' tidak ditemukan!\n", namaBuku);
     }
