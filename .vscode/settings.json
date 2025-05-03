@@ -63,6 +63,8 @@
     "string": "cpp",
     "history.h": "c",
     "buku.h": "c",
-    "anggota.h": "c"
+    "anggota.h": "c",
+    "string.h": "c",
+    "queue.h": "c"
   }
 }

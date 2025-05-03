@@ -8,10 +8,18 @@
 
 #include "history.c"
 
+#include "doubly.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 
 int main() {
+    doubly();
+
+    return 0;
+}
+
+void doubly() {
     addressBuku listBuku = NULL;
     int choice;
 
@@ -22,7 +30,9 @@ int main() {
         printf("3. Proses Peminjaman Buku\n");
         printf("4. Tampilkan Semua Buku dan Antrian\n");
         printf("5. Tampilkan Riwayat Anggota\n");
-        printf("6. Exit\n");
+        printf("6. Kembalikan Buku \n");
+        printf("7. Tampilkan History \n");
+        printf("8. Keluar \n");
         printf("Pilihan: ");
         scanf("%d", &choice); getchar(); // Buang newline
 
@@ -121,7 +131,7 @@ int main() {
             break;
         }
         else if (choice == 7) {
-            tampilkanHistory();
+            tampilkanCatatan();
         }
         else if (choice == 6) {
             printf("Keluar dari program.\n");

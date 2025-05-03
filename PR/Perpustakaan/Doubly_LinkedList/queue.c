@@ -450,17 +450,12 @@ void prosesPengembalianBuku(addressBuku *listBuku, const char *namaBuku, int jum
     printf("Buku '%s' berhasil dikembalikan sebanyak %d.\n", namaBuku, jumlah);
     printf("Stok sekarang: %d\n", curr->stok);
 
-    // (Optional) Tambah ke history umum atau log (jika ingin)
-    // Jika kamu ingin menambahkan riwayat ke masing-masing anggota, 
-    // kamu perlu tahu siapa yang mengembalikan — bisa diminta input juga.
-
-    // Contoh input tambahan untuk nama anggota yang mengembalikan:
-    /*
+    // Tambah catatan transaksi
     char namaAnggota[100];
     printf("Masukkan nama anggota yang mengembalikan buku: ");
     scanf(" %[^\n]%*c", namaAnggota);
-    tambahHistory(namaBuku, namaAnggota, 1, "Pengembalian", &curr->antrian);
-    */
+
+    tambahCatatan(curr->judul, namaAnggota, jumlah, "Pengembalian");
 }
 
 void printListBukuDanAntrian(addressBuku listBuku) {

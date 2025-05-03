@@ -6,6 +6,7 @@
 #include "buku.h"
 #include "anggota.h"
 #include "history.h"
+#include "catatan.h"
 
 
 addressBuku createBuku(char *judul, int stok) {
@@ -198,6 +199,9 @@ void prosesPeminjamanBuku(addressBuku *listBuku, char *judulBuku, Queue *q, char
 
         // Tandai bahwa anggota ini sedang meminjam buku ini
         peminjam->buku = buku;
+
+        tambahCatatan(judulBuku, peminjam->name, 1, "Peminjaman");
+
 
         // Tambahkan ke riwayat
         addressHistory h = (addressHistory) malloc(sizeof(History));

@@ -1,11 +1,26 @@
-#include "buku.h"
-#include "anggota.h"
-#include "queue.h"
+
 
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 
+#include "buku.h"
+#include "buku.c"
+#include "anggota.h"
+#include "anggota.c"
+#include "queue.h"
+#include "queue.c"
+#include "catatan.h"
+#include "catatan.c"
+#include "single.h"
+
 int main() {
+    single();
+
+    return 0;
+}
+
+void single() {
     // Buku ListBuku = NULL;
 
     // ins_Awal_Buku(&ListBuku, createBuku("Harry Potter", 4));
@@ -70,9 +85,8 @@ int main() {
         printf("2. Tambah Buku\n");
         printf("3. Tambah anggota ke Antrian Peminjaman dan Proses Peminjaman\n");
         printf("4. Proses Pengembalian\n");
-        printf("5. \n");
-        printf("6. Tampilkan History\n");
-        printf("7. Exit\n");
+        printf("5. Tampilkan History\n");
+        printf("6. Exit\n");
 
         scanf("%d", &choice);
 
@@ -156,11 +170,11 @@ int main() {
                 prosesPengembalianBuku(&ListBuku, namaBuku, jumlah);
 
                 break;
-            case 6:
+            case 5:
                 tampilkanHistory();
                 break;
             
-            case 7:
+            case 6:
                 printf("Exit...");
                 return 0;
 
@@ -169,6 +183,5 @@ int main() {
         }
     }
 
-    return 0;
     
 }
