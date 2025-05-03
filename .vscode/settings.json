@@ -60,6 +60,9 @@
     "stack.h": "c",
     "stdio.h": "c",
     "array": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "history.h": "c",
+    "buku.h": "c",
+    "anggota.h": "c"
   }
 }

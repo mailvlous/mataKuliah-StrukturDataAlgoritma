@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <malloc.h>
+#include "buku.h"
 
 #define Name(P) (P)->name
 #define Value(P) (P)->value

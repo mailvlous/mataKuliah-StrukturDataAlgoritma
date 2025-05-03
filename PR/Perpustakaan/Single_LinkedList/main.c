@@ -80,7 +80,7 @@ int main() {
             case 1:
                 printList(ListBuku);
                 break;
-            case 2: {
+            case 2: 
                 getchar(); // Buang newline sisa dari input sebelumnya
                 printf("Judul buku: ");
                 scanf("%99[^\n]", namaBuku); getchar();
@@ -90,7 +90,7 @@ int main() {
 
                 ins_Awal_Buku(&ListBuku, createBuku(namaBuku, stok));
                 break;
-            }
+            
             case 3: {
                 getchar();
                 char namaBuku[100];
