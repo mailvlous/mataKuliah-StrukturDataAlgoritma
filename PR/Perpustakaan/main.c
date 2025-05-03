@@ -7,22 +7,22 @@ int main() {
 
     do {
         printf("\n=== Menu Utama ===\n");
-        printf("1. Jalankan Array\n");
-        printf("2. Jalankan Single Linked List\n");
-        printf("3. Jalankan Doubly Linked List\n");
+        printf("1. Jalankan Single Linked List\n");
+        printf("2. Jalankan Doubly Linked List\n");
+        printf("3. Jalankan Array\n");
         printf("0. Keluar\n");
         printf("Pilih: ");
         scanf("%d", &pilihan);
 
         switch (pilihan) {
             case 1:
-                system("array_main.exe");
+                system("single_main.exe");
                 break;
             case 2:
-                system("Single_LinkedList/single.exe");
+                system("doubly_main.exe");
                 break;
             case 3:
-                system("Doubly_LinkedList/doubly.exe");
+                system("array_main.exe");
                 break;
             case 0:
                 printf("Keluar dari program.\n");
