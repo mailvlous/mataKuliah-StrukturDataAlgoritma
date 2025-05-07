@@ -12,6 +12,6 @@ int main() {
     tree[4] = (nbtree){'D', 0, 5, 2};
     tree[5] = (nbtree){'E', 0, 0, 2};
 
-    PreOrder(tree);
+    PrintTree(tree);
     
 }
