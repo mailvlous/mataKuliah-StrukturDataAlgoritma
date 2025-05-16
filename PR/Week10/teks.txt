@@ -1,0 +1,3 @@
+ini
+teks
+3 baris

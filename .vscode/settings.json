@@ -65,6 +65,7 @@
     "buku.h": "c",
     "anggota.h": "c",
     "string.h": "c",
-    "queue.h": "c"
+    "queue.h": "c",
+    "functional": "c"
   }
 }

@@ -1,10 +1,7 @@
 #include "linked.h"
 #include <stdbool.h>
 
-
-
 typedef address Queue;
-
 
 bool isQueueEmpty(address p);
 
